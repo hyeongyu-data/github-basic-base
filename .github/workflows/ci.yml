@@ -12,7 +12,7 @@ jobs:
   lint-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # 언어 무관 기본 검사 (pre-commit 훅: 공백/개행/YAML/시크릿 등)
       - uses: actions/setup-python@v6
