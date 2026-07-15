@@ -11,6 +11,30 @@
 > `.github/workflows/ci.yml`(빌드·테스트 단계), `dependabot.yml`(패키지 매니저).
 > Python 프로젝트라면 [github-basic-python](https://github.com/hyeongyu-data/github-basic-python) 템플릿을 쓰세요.
 
+## 🚀 새 프로젝트 시작 (셋업)
+
+1. **템플릿으로 레포 생성** — 위 `Use this template` 버튼, 또는:
+   ```shell
+   gh repo create <이름> --template hyeongyu-data/github-basic-base --private --clone
+   ```
+2. **placeholder 채우기** — `LICENSE`(이름·연도), `README.md`, `CLAUDE.md`(프로젝트 설명).
+3. **언어별 채우기** — `.gitignore`, `.pre-commit-config.yaml`(린터/포매터), `.github/workflows/ci.yml`(빌드·테스트), `dependabot.yml`(패키지 매니저).
+4. **로컬 세팅:**
+   ```shell
+   pip install pre-commit && pre-commit install   # 커밋 전 기본 검사
+   git config commit.template .gitmessage          # 커밋 메시지 양식
+   ```
+5. **main 브랜치 보호 적용** — 템플릿은 파일만 복제되므로 ruleset은 직접 걸어야 합니다(레포가 public이거나 GitHub Pro 필요). 혼자 쓰면 파일에서 `required_approving_review_count`를 `0`으로:
+   ```shell
+   gh api repos/<owner>/<repo>/rulesets --method POST --input branch_ruleset_main.json
+   ```
+6. **릴리스** — 라벨별 자동 분류(`.github/release.yml`):
+   ```shell
+   gh release create v0.1.0 --generate-notes
+   ```
+
+> 1·4·5를 한 방에: `newproj <이름> [python|base] [private|public]` 헬퍼(`~/.newproj.zsh`).
+
 ## Setup
 
 ```shell
